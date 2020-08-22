@@ -1,14 +1,11 @@
 <?php
 
 spl_autoload_register(function ($className){
-    $path = '';
+    $path = 'application/core/';
     $extension = '.php';
-    $fullPath = $path . $className . $extension;
+    $fullPath = $path . strtolower($className) . $extension;
 
-    echo "$fullPath";
-    var_dump($className);
-    if(!file_exists($fullPath))
-    {
+    if(!file_exists($fullPath)){
         return false;
     }
 

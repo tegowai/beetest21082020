@@ -1,8 +1,54 @@
 <?php
 class Route{
     static function start(){
+
+        //friendly URL values by default
         $controller_name = "Tasks";
         $action_name = "index";
+
+        $routes = explode('/', $_SERVER['REQUEST_URI']);
+
+        //if blank root URL redirect to correct start friendly URL
+        /*if(empty($routes[3])||empty($routes[4])){
+            Route::redir($controller_name,$action_name);
+        }*/
+
+        if(!empty($routes[3])){
+            $controller_name = $routes[3];
+        }
+
+        if(!empty($routes[4])){
+            $action_name = $routes[4];
+        }
+        //if the given action pagination index is 0
+        else if($routes[4]==="0"){
+            $action_name = intval($routes[4]);
+        }
+
+        //pagination start page
+        $page = 1;
+        // $page = intval($routes[4]);
+        /*if action parameter is number,convert it to 'index' and
+        send number as an argument*/
+        if(is_numeric($action_name)){
+            $tasksCnt = Model_Tasks::$tasksQnt;
+            $pages = intdiv($tasksCnt,3);/*possible quantity of pages,that will
+            store all tasks from DB*/
+            $page = intval($action_name);//given number of the page
+            //if given number exceeds the possible quantity of pages
+
+            if($page>$pages){
+                $page=$pages;
+                Route::redir($controller_name,$page);
+            }
+            if($page<=0){
+                $page = 1;
+                Route::redir($controller_name,$page);
+            }
+            $action_name = "index";
+        }
+
+        //creating model files based on the given URI
         $model_name = 'Model_'.$controller_name;
         $controller_name = 'Controller_'.$controller_name;
         $action_name = 'action_'.$action_name;
@@ -22,15 +68,15 @@ class Route{
             Route::ErrorPage404();
         }
 
+
         $controller = new $controller_name;
         $action = $action_name;
 
         if(method_exists($controller, $action)){
-            // вызываем действие контроллера
-            $controller->$action();
+            // controller method call - page
+            $controller->$action($page-1);
         }
         else{
-            // здесь также разумнее было бы кинуть исключение
             Route::ErrorPage404();
         }
     }
@@ -40,6 +86,13 @@ class Route{
         header('HTTP/1.1 404 Not Found');
         header("Status: 404 Not Found");
         header('Location:'.$host.'404');
+    }
+
+    function redir($controller_name,$action_name){
+        $root = '/phpcode/beetest/';
+        $fullSite = 'http://'.$_SERVER['SERVER_NAME'].$root.
+        $controller_name.'/'.$action_name;
+        header('Location: '.$fullSite);
     }
 }
 

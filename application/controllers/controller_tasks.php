@@ -6,8 +6,8 @@ class Controller_Tasks extends Controller{
         $this->view = new View();
     }
 
-    function action_index(){
-        $data = $this->model->get_data();
+    function action_index($page = 0){
+        $data = $this->model->get_data($page);
         $this->view->generate('tasks_view.php', 'template_view.php', $data);
     }
 }
