@@ -1,4 +1,5 @@
 <?php
+    namespace application\core;
     class Common{
         public static $rootSite = "/phpcode/beetest/";
 

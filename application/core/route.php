@@ -1,4 +1,6 @@
 <?php
+namespace application\core;
+use application\models\Model_tasks;
 class Route{
     static function start(){
 
@@ -31,7 +33,7 @@ class Route{
         /*if action parameter is number,convert it to 'index' and
         send number as an argument*/
         if(is_numeric($action_name)){
-            $tasksCnt = Model_Tasks::$tasksQnt;
+            $tasksCnt = sizeof(Model_Tasks::get_data());
             $pages = intdiv($tasksCnt,3);/*possible quantity of pages,that will
             store all tasks from DB*/
             $page = intval($action_name);//given number of the page

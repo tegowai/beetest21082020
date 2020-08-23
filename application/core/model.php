@@ -1,7 +1,8 @@
 <?php
+namespace application\core;
 class Model
 {
-    public function get_data(){
+    public static function get_data(){
 
     }
 }
