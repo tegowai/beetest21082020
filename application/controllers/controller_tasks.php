@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../vendor/autoload.php';
 namespace application\controllers;
 use application\models\Model_tasks;
 use application\core\View;

@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../../vendor/autoload.php';
 namespace application\core;
 use application\models\Model_tasks;
 class Route{

@@ -1,0 +1,22 @@
+{
+    "name": "beejee/test",
+    "description": "Test Beejee",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "tegowai",
+            "email": "bin2oct8@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {},
+    "autoload":{
+        "psr-4":{
+            "application\\core\\": "",
+            "application\\models\\": "",
+            "application\\controllers\\": "",
+            "application\\views\\": ""
+        }
+    }
+}
