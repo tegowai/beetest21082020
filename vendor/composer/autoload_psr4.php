@@ -4,9 +4,10 @@
 
 $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
+
 return array(
-    'application\\views\\' => array($baseDir . '/'),
-    'application\\models\\' => array($baseDir . '/'),
-    'application\\core\\' => array($baseDir . '/'),
-    'application\\controllers\\' => array($baseDir . '/'),
+    'views\\' => array($baseDir . '/application/views'),
+    'models\\' => array($baseDir . '/application/models'),
+    'core\\' => array($baseDir . '/application/core'),
+    'controllers\\' => array($baseDir . '/application/controllers'),
 );

@@ -4,42 +4,48 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitc6f501e0d679bfb0d104470a9088a579
+class ComposerStaticInit27090eb2f7d38ef6345736006a196a0e
 {
     public static $prefixLengthsPsr4 = array (
-        'a' => 
+        'v' => 
         array (
-            'application\\views\\' => 18,
-            'application\\models\\' => 19,
-            'application\\core\\' => 17,
-            'application\\controllers\\' => 24,
+            'views\\' => 6,
+        ),
+        'm' => 
+        array (
+            'models\\' => 7,
+        ),
+        'c' => 
+        array (
+            'core\\' => 5,
+            'controllers\\' => 12,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'application\\views\\' => 
+        'views\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/',
+            0 => __DIR__ . '/../..' . '/application/views',
         ),
-        'application\\models\\' => 
+        'models\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/',
+            0 => __DIR__ . '/../..' . '/application/models',
         ),
-        'application\\core\\' => 
+        'core\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/',
+            0 => __DIR__ . '/../..' . '/application/core',
         ),
-        'application\\controllers\\' => 
+        'controllers\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/',
+            0 => __DIR__ . '/../..' . '/application/controllers',
         ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitc6f501e0d679bfb0d104470a9088a579::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitc6f501e0d679bfb0d104470a9088a579::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit27090eb2f7d38ef6345736006a196a0e::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit27090eb2f7d38ef6345736006a196a0e::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

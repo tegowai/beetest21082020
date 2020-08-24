@@ -1,6 +1,6 @@
 <?php
-namespace application\models;
-use application\core\Model;
+namespace models;
+use core\Model;
 
 class Model_Tasks extends Model{
     public static function get_data($page=0){

@@ -1,9 +1,8 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
-namespace application\controllers;
-use application\models\Model_tasks;
-use application\core\View;
-use application\core\Controller;
+namespace controllers;
+use models\Model_tasks;
+use core\View;
+use core\Controller;
 class Controller_Tasks extends Controller{
     function __construct(){
         $this->model = new Model_Tasks();

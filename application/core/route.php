@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../../vendor/autoload.php';
-namespace application\core;
-use application\models\Model_tasks;
+namespace core;
+use models\Model_tasks;
+use controllers\Controller_Tasks;
 class Route{
     static function start(){
 
