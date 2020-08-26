@@ -2,3 +2,11 @@
     margin:auto;
     width:353px;
 }
+
+.pagination{
+    border-radius: 10px !important;
+}
+
+.task{
+    border-radius: 20px !important;
+}

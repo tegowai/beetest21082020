@@ -6,11 +6,11 @@
     "minimum-stability": "stable",
     "require": {},
     "autoload":{
-        "psr-4":{
-            "core\\": "application/core/",
-            "models\\": "application/models/",
-            "controllers\\": "application/controllers/",
-            "views\\": "application/views/"
+        "psr-4": {
+            "Core\\": "application/core/",
+            "Models\\": "application/models/",
+            "Controllers\\": "application/controllers/",
+            "Views\\": "application/views/"
         }
     }
 }

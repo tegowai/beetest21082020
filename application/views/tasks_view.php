@@ -1,7 +1,7 @@
 <?php
     foreach($data as $row){
         echo '
-            <div class="container-sm p-3 my-3 bg-secondary text-white">
+            <div class="container-sm p-3 my-3 bg-secondary text-white task">
                 <p>'.$row['date'].'</p>
                 <h1>'.$row['name'].'</h1>
                 <p>'.$row['mail'].'</p>

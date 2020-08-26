@@ -7,35 +7,35 @@ namespace Composer\Autoload;
 class ComposerStaticInit27090eb2f7d38ef6345736006a196a0e
 {
     public static $prefixLengthsPsr4 = array (
-        'v' => 
+        'V' => 
         array (
-            'views\\' => 6,
+            'Views\\' => 6,
         ),
-        'm' => 
+        'M' => 
         array (
-            'models\\' => 7,
+            'Models\\' => 7,
         ),
-        'c' => 
+        'C' => 
         array (
-            'core\\' => 5,
-            'controllers\\' => 12,
+            'Core\\' => 5,
+            'Controllers\\' => 12,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'views\\' => 
+        'Views\\' => 
         array (
             0 => __DIR__ . '/../..' . '/application/views',
         ),
-        'models\\' => 
+        'Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/application/models',
         ),
-        'core\\' => 
+        'Core\\' => 
         array (
             0 => __DIR__ . '/../..' . '/application/core',
         ),
-        'controllers\\' => 
+        'Controllers\\' => 
         array (
             0 => __DIR__ . '/../..' . '/application/controllers',
         ),

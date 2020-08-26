@@ -1,7 +1,7 @@
 <?php
-namespace core;
-use models\Model_tasks;
-use controllers\Controller_Tasks;
+namespace Core;
+use Models\ModelTasks;
+use Controllers\ControllerTasks;
 class Route{
     static function start(){
 
@@ -11,22 +11,32 @@ class Route{
 
         $routes = explode('/', $_SERVER['REQUEST_URI']);
 
-        //if blank root URL redirect to correct start friendly URL
-        /*if(empty($routes[3])||empty($routes[4])){
-            Route::redir($controller_name,$action_name);
-        }*/
+        /*if URI is variable length (project will not be in root dir)
+        then project path must be considered
+        the additional path must be stored in Model class's static var
+        $rootSite
+        */
+        $rt = explode('/',Model::$rootSite);
+        $uriOffset = sizeof($rt)+1;/*+1 because in standart case with project in
+        site root dir the sitename wont be in URI variable*/
 
-        if(!empty($routes[3])){
-            $controller_name = $routes[3];
+        //if blank root URL redirect to correct start friendly URL
+        if(empty($routes[3])||empty($routes[4])){
+            // Route::redir($controller_name,$action_name);
         }
 
-        if(!empty($routes[4])){
-            $action_name = $routes[4];
+        if(!empty($routes[0+$uriOffset])){
+            $controller_name = ucfirst($routes[0+$uriOffset]);
+        }
+
+        if(!empty($routes[1+$uriOffset])){
+            $action_name = $routes[1+$uriOffset];
         }
         //if the given action pagination index is 0
-        else if($routes[4]==="0"){
-            $action_name = intval($routes[4]);
+        else if(isset($routes[1+$uriOffset])&&$routes[1+$uriOffset]==="0"){
+            $action_name = intval($routes[1+$uriOffset]);
         }
+
 
         //pagination start page
         $page = 1;
@@ -34,45 +44,45 @@ class Route{
         /*if action parameter is number,convert it to 'index' and
         send number as an argument*/
         if(is_numeric($action_name)){
-            $tasksCnt = sizeof(Model_Tasks::get_data());
-            $pages = intdiv($tasksCnt,3);/*possible quantity of pages,that will
-            store all tasks from DB*/
+            $pages = ModelTasks::getPagesQuantity();
             $page = intval($action_name);//given number of the page
-            //if given number exceeds the possible quantity of pages
 
+            //if given number exceeds the possible quantity of pages
             if($page>$pages){
                 $page=$pages;
-                Route::redir($controller_name,$page);
+                // Route::redir($controller_name,$page);
             }
             if($page<=0){
                 $page = 1;
-                Route::redir($controller_name,$page);
+                // Route::redir($controller_name,$page);
             }
             $action_name = "index";
         }
+        else{
+            // Route::redir($controller_name,1);
+        }
 
         //creating model files based on the given URI
-        $model_name = 'Model_'.$controller_name;
-        $controller_name = 'Controller_'.$controller_name;
+        $model_name = 'Models\Model'.$controller_name;
+        $controller_name = 'Controllers\Controller'.$controller_name;
         $action_name = 'action_'.$action_name;
 
         $model_file = strtolower($model_name).'.php';
-        $model_path = "application/models/".$model_file;
+        $model_path = "application/".$model_file;
         if(file_exists($model_path)){
-            include "application/models/".$model_file;
+            include_once "application/".$model_file;
         }
 
         $controller_file = strtolower($controller_name).'.php';
-        $controller_path = "application/controllers/".$controller_file;
+        $controller_path = "application/".$controller_file;
         if(file_exists($controller_path)){
-            include "application/controllers/".$controller_file;
+            include_once "application/".$controller_file;
         }
         else{
-            Route::ErrorPage404();
+            // Route::ErrorPage404();
         }
 
-
-        $controller = new $controller_name;
+        $controller = new $controller_name();
         $action = $action_name;
 
         if(method_exists($controller, $action)){
@@ -80,7 +90,12 @@ class Route{
             $controller->$action($page-1);
         }
         else{
-            Route::ErrorPage404();
+            $root = '/' . Model::$rootSite . '/';
+            $fullSite = 'http://'.$_SERVER['SERVER_NAME'].$root.
+            $controller_name.'/'.$action_name;
+            echo $fullSite;
+            // echo "$action($page)";
+            // Route::ErrorPage404();
         }
     }
 
@@ -92,7 +107,7 @@ class Route{
     }
 
     function redir($controller_name,$action_name){
-        $root = '/phpcode/beetest/';
+        $root = '/' . Model::$rootSite . '/';
         $fullSite = 'http://'.$_SERVER['SERVER_NAME'].$root.
         $controller_name.'/'.$action_name;
         header('Location: '.$fullSite);

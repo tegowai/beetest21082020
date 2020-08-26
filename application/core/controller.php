@@ -1,6 +1,6 @@
 <?php
-namespace core;
-use core\View;
+namespace Core;
+use Core\View;
 class Controller {
 
     public $model;
