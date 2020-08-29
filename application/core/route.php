@@ -48,8 +48,10 @@ class Route{
         }
 
         if($routes[count($routes)-2]=='updatetask'){
-            $controller = new ControllerUpdateTask();
-            $controller->action_index(end($routes));
+            if(isset($_SESSION['auth_success'])){
+                $controller = new ControllerUpdateTask();
+                $controller->action_index(end($routes));
+            }
             Route::redir('Tasks',$page);
             return;
         }
