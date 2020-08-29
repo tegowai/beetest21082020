@@ -24,6 +24,7 @@ class ModelTasks extends Model{
         $offset = $page*self::$qnt;
         self::setSort();
         $link = mysqli_connect('localhost', 'tegowai', 'easyPass','beetest');
+        mysqli_set_charset($link , 'utf8' );
         $query = 'SELECT `tasks`.`name` as `name`, `tasks`.`mail` as `mail`, `tasks`.`id` as `task_id`,`tasks`.`task` as `task`,`tasks`.`task_date` as `date`,`tasks`.`status` as `status`,`tasks`.`edited` as `edited` FROM `tasks` ORDER BY '.self::$sort.' LIMIT '.self::$qnt.' OFFSET ' .$offset;
         $result = mysqli_query($link,$query) or die(mysqli_error($link));
         $res = mysqli_fetch_all($result,MYSQLI_ASSOC);

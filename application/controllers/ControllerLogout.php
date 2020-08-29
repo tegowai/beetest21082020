@@ -14,6 +14,9 @@ class ControllerLogout extends Controller{
 
         if(isset($_SESSION['auth_errors']))
             unset($_SESSION['auth_errors']);
+
+        if(isset($_SESSION['author_mail']))
+            unset($_SESSION['author_mail']);
     }
 
 }

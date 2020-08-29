@@ -6,7 +6,7 @@ use R;
 class ModelUpdateTask extends Model{
     public static function get_data($idmsg){
         if(!R::testConnection())
-            R::setup( 'mysql:host=localhost;dbname=beetest',
+            R::setup( 'mysql:host=localhost;dbname=beetest;charset=utf8mb4',
             'tegowai', 'easyPass' );
         $task = R::load('tasks',$idmsg);
 
