@@ -2,19 +2,19 @@ set names utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 CREATE TABLE `users` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `name` VARCHAR(255) NOT NULL UNIQUE,
-    `mail` VARCHAR(255),
+    `name` VARCHAR(255) NOT NULL UNIQUE CHARSET "utf8",
+    `mail` VARCHAR(255) CHARSET "utf8",
     `group` VARCHAR(8) DEFAULT 'users',
     `password` VARCHAR(255) DEFAULT '$2y$10$WLqvJrAIFMoyxkQNRUsbae7YneFaN2rFqnrdAXhllk69AaoCkHgdK'/*123 пароль*/
 )Engine InnoDB;
 
 CREATE TABLE `tasks` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
-    `task` TEXT,
+    `task` TEXT CHARSET "utf8",
     `task_date` DATETIME DEFAULT NOW(),
     `status` VARCHAR(20) DEFAULT 'new',
-    `name` VARCHAR(20) DEFAULT 'unknown',
-    `mail` VARCHAR(30),
+    `name` VARCHAR(20) DEFAULT 'unknown' CHARSET "utf8",
+    `mail` VARCHAR(30) CHARSET "utf8"c,
     `edited` BOOL DEFAULT FALSE
 );
 

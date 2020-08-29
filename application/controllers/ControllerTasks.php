@@ -11,6 +11,7 @@ class ControllerTasks extends Controller{
 
     function action_index($page = 0){
         $data = $this->model->get_data($page);
+        $_SESSION['pageList'] = $page;
         $this->view->generate('tasks_view.php', 'template_view.php', $data, $page+1);
     }
 }
