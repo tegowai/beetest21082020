@@ -5,6 +5,7 @@ use Controllers\ControllerTasks;
 use Controllers\ControllerLogout;
 use Controllers\ControllerLogin;
 use Controllers\ControllerAddTask;
+use Controllers\ControllerUpdateTask;
 class Route{
     static function start(){
 
@@ -35,10 +36,26 @@ class Route{
 
         if(end($routes)=='addtask'){
             $controller = new ControllerAddTask();
-            $controller->action_index($page);
+            $controller->action_index();
             Route::redir('Tasks',$page);
             return;
         }
+
+        if($routes[count($routes)-2]=='editmsg'){
+            $_SESSION['update'] = end($routes);
+            Route::redir('Tasks',$page);
+            return;
+        }
+
+        if($routes[count($routes)-2]=='updatetask'){
+            $controller = new ControllerUpdateTask();
+            $controller->action_index(end($routes));
+            Route::redir('Tasks',$page);
+            return;
+        }
+        // var_dump($_SESSION['post']);
+        // var_dump($_SESSION['update']);
+
         //Set controller and action
         /*if URI is variable length (project will not be in root dir)
         then project path must be considered
@@ -128,6 +145,10 @@ class Route{
             $controller_name.'/'.$action_name;
             Route::ErrorPage404();
         }
+
+        //turn off the edit mode after each pagination etc..
+        if(isset($_SESSION['update']))
+            unset($_SESSION['update']);
     }
 
     function ErrorPage404(){

@@ -118,31 +118,65 @@
 </div><!--end main container-->
 <?php
     foreach($data as $row){
-        if(!isset($_SESSION['auth_success']))
+        $admin='';
+        if(isset($_SESSION['auth_success']))
             $admin = 1;
 
         $edited = $row['edited']==0 ? 'visibility:hidden' : '';
 
-        if($row['status']=='in progress')
-            $statusColor = "bg-warning";
-        else if($row['status']=='finished')
-            $statusColor = "bg-success";
+        $statusColor = array('in progress'=>'bg-warning','finished'=>'bg-success','new'=>'bg-danger');
+
+        $update = isset($_SESSION['update']) ? $_SESSION['update'] : 0;
+        $updateThis = $update==$row['task_id'];
+        if($admin&&$updateThis)
+            $editMsg = '<button type="submit" class="btn bg-danger mb-2 edit-msg">Сохранить</button>';
+        else if($admin&&!$update)
+            $editMsg = '<a href="'.$root . 'editmsg/'.$row['task_id'].'"><button class="btn bg-secondary mb-2 edit-msg">Редактировать</button></a>';
         else
-            $statusColor = "bg-danger";
+            $editMsg = '<p class="taskdate text-secondary">'.$row['date'].'</p>';
+
 
         echo '
-            <div class="container-sm p-3 my-3 bg-light border task">
+            <div class="container-sm p-3 my-3 bg-light border task">';
+        if($admin&&$updateThis)
+            echo '<form class="add-task-form" method="post" action="'.$root . 'updatetask/'.$_SESSION['update'].'">';
+        echo '
                 <p class="task_id">#<span name="task_id">'.$row['task_id'].'</span></p>
-                <p class="taskdate text-secondary">'.$row['date'].'</p>
+                '.$editMsg.'
                 <div>
                     <span>'.$row['name'].' - </span>
                     <span>'.$row['mail'].'</span>
-                </div>
-                <p>'.$row['task'].'</p>
-                <span class="taskstatus '.$statusColor.'">'.$row['status'].'</span>
-                <span class="text-secondary edited" style="'.$edited.'">**отредактировано администратором**</span>
-            </div>
-        ';
+                </div>';
+
+        if($admin&&$updateThis){
+            $statuses = array('new'=>'bg-danger','in progress'=>'bg-warning','finished'=>'bg-success');
+        echo '
+            <textarea type="text" class="form-control t_task_edit" id="t_task_edit" name="t_text" placeholder="Текст вашей задачи" required>'.$row['task'].'</textarea>
+            <div class="status-radio" id="status'.$row['task_id'].'">';
+            foreach($statuses as $k=>$v){
+                $checkedcolor = '';
+                $checkedRadio = '';
+                if($k==$row['status']){
+                    $checkedcolor = $statuses[$k];
+                    $checkedRadio = 'checked';
+                }
+                echo '
+                <div class="form-check form-check-inline statusRadio '.$checkedcolor.'">
+                  <input class="form-check-input" type="radio" name="t_status" id="inlineRadio'.$row['task_id'].'1" value="'.$k.'" '.$checkedRadio.'>
+                  <label class="form-check-label" for="'.$row['task_id'].'1">'.ucfirst($k).'</label>
+                </div>';
+            }
+            echo '</div>';
+        }
+        else{
+            echo '
+            <p>'.$row['task'].'</p>
+            <span class="taskstatus '.$statusColor[$row['status']].'">'.$row['status'].'</span>
+                <span class="text-secondary edited" style="'.$edited.'">**отредактировано администратором**</span>';
+        }
+        if($admin&&$updateThis)
+            echo '</form>';
+        echo ' </div>';
     }
 
 ?>

@@ -19,7 +19,8 @@
     $fullSite = 'http://'.$_SERVER['SERVER_NAME'].$root."logout";
     $error = isset($_SESSION['auth_errors']) ? end($_SESSION['auth_errors']) : '';
     $displayError = !empty($error) ? "display:inline-block" : '';
-    $author = isset($_SESSION['auth_success']) ? $_SESSION['login'] : '';
+    $author = isset($_SESSION['auth_success']) ? strtoupper($_SESSION['login']) : '';
+    $authorMail = isset($_SESSION['author_mail']) ? $_SESSION['author_mail'] : '';
     $readonly = !empty($author) ? 'readonly' : 'required';
     if(!isset($_SESSION['auth_success'])){
         $login = isset($_SESSION['login']) ? $_SESSION['login'] : '';
@@ -46,8 +47,8 @@
     else{
         echo '
     <div class="container authin inline">
-        <h3>'.$_SESSION['login'].'</h3>
-        <span><a href="'.$fullSite.'">Logout</a></span>
+        <h3>'.$author.'</h3>
+        <a href="'.$fullSite.'"><button type="submit" class="btn btn-info mb-2">Logout</button></a>
     </div>';
     }
 
@@ -57,10 +58,10 @@
         <form class="add-task-form" method="post" action="<?=$root . 'addtask'?>">
             <div class="form-row">
                 <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control t_name" id="t_name" placeholder="Имя" name="t_name" value="<?=$author?>" <?=$readonly?>>
+                    <input type="text" class="form-control t_name" id="t_name" placeholder="Имя" name="t_name" value="<?=ucfirst(strtolower($author))?>" <?=$readonly?>>
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input type="text" class="form-control t_mail" id="t_mail" name="t_mail" placeholder="E-Mail" required>
+                    <input type="text" class="form-control t_mail" id="t_mail" name="t_mail" placeholder="E-Mail" value="<?=$authorMail?>" <?=$readonly?>>
                 </div>
                 <div class="col-md-4 mb-3">
                     <button type="submit" class="btn bg-info mb-2">Отправить</button>

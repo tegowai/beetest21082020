@@ -9,9 +9,9 @@ class ModelAddTask extends Model{
             R::setup( 'mysql:host=localhost;dbname=beetest',
             'tegowai', 'easyPass' ); //for both mysql or mariaDB
         $task = R::dispense('tasks');
-        $task->task = $_SESSION['post']['t_text'];
-        $task->name = $_SESSION['post']['t_name'];
-        $task->mail = $_SESSION['post']['t_mail'];
+        $task->task = htmlspecialchars($_SESSION['post']['t_text'], ENT_QUOTES, 'UTF-8');
+        $task->name = htmlspecialchars($_SESSION['post']['t_name'], ENT_QUOTES, 'UTF-8');
+        $task->mail = htmlspecialchars($_SESSION['post']['t_mail'], ENT_QUOTES, 'UTF-8');
         R::store($task);
         R::close();
         //https://www.redbeanphp.com/index.php?p=/connection

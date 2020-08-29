@@ -5,7 +5,8 @@ use R;
 
 class ModelLogin extends Model{
     public static function get_data(){
-        R::setup( 'mysql:host=localhost;dbname=beetest',
+        if(!R::testConnection())
+            R::setup( 'mysql:host=localhost;dbname=beetest',
             'tegowai', 'easyPass' ); //for both mysql or mariaDB
 
         $errors = array();
@@ -15,6 +16,7 @@ class ModelLogin extends Model{
             if($user){
                 if(password_verify($_SESSION['password'],$user->password)){
                     $_SESSION['auth_success'] = 1;
+                    $_SESSION['author_mail'] = $user->mail;
                 }
                 else{
                     $errors[] = 'Неправильный пароль';

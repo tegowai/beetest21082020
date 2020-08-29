@@ -44,6 +44,12 @@
     font-family:'Play',serif;
 }
 
+button.edit-msg{
+    width: 100px;
+    height: 30px;
+    font-size: 8pt;
+}
+
 .ul-pag{
     margin-bottom:8px;
 }
@@ -63,6 +69,11 @@
 .newtask textarea{
     resize:none;
     height:150px;
+}
+
+.add-task-form textarea{
+    resize:none;
+    margin-bottom:10px;
 }
 
 .edited{
@@ -91,4 +102,10 @@
     padding-right:3px;
     margin-left:0px;
     margin-right:0px;
+}
+
+.task .statusRadio{
+    margin-right: 20px;
+    padding: 3px 10px;
+    border-radius: 10px;
 }
