@@ -11,6 +11,10 @@ class ComposerStaticInit27090eb2f7d38ef6345736006a196a0e
         array (
             'Views\\' => 6,
         ),
+        'R' => 
+        array (
+            'RedBeanPHP\\' => 11,
+        ),
         'M' => 
         array (
             'Models\\' => 7,
@@ -26,6 +30,10 @@ class ComposerStaticInit27090eb2f7d38ef6345736006a196a0e
         'Views\\' => 
         array (
             0 => __DIR__ . '/../..' . '/application/views',
+        ),
+        'RedBeanPHP\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/libs',
         ),
         'Models\\' => 
         array (

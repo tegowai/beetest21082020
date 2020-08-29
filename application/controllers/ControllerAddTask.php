@@ -1,12 +1,12 @@
 <?php
 
 namespace Controllers;
-use Models\ModelLogin;
+use Models\ModelAddTask;
 use Core\Controller;
 
-class ControllerLogin{
+class ControllerAddTask{
     function __construct(){
-        $this->model = new ModelLogin();
+        $this->model = new ModelAddTask();
     }
 
     function action_index(){

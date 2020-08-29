@@ -38,7 +38,10 @@
     margin-left: 10px;
     color:red;
     font-weight: bold;
-    display:none;
+}
+
+.task{
+    font-family:'Play',serif;
 }
 
 .ul-pag{
@@ -71,4 +74,21 @@
     display:inline-block;
     padding:3px 15px;
     border-radius: 10px;
+}
+
+.task .taskdate{
+    font-size:8pt;
+}
+
+.sortingType,.sortingOrder{
+    padding-left:3px;
+    padding-right:3px;
+    margin-left:0px;
+    margin-right:0px;
+}
+
+.pagination{
+    padding-right:3px;
+    margin-left:0px;
+    margin-right:0px;
 }

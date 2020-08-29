@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Views\\' => array($baseDir . '/application/views'),
+    'RedBeanPHP\\' => array($baseDir . '/libs'),
     'Models\\' => array($baseDir . '/application/models'),
     'Core\\' => array($baseDir . '/application/core'),
     'Controllers\\' => array($baseDir . '/application/controllers'),

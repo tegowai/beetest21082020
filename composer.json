@@ -10,7 +10,8 @@
             "Core\\": "application/core/",
             "Models\\": "application/models/",
             "Controllers\\": "application/controllers/",
-            "Views\\": "application/views/"
+            "Views\\": "application/views/",
+            "RedBeanPHP\\": "libs/"
         }
     }
 }
