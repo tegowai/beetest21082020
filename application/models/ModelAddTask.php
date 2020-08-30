@@ -14,6 +14,5 @@ class ModelAddTask extends Model{
         $task->mail = htmlspecialchars($_SESSION['post']['t_mail'], ENT_QUOTES);
         R::store($task);
         R::close();
-        //https://www.redbeanphp.com/index.php?p=/connection
     }
 }

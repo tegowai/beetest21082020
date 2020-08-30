@@ -7,7 +7,7 @@ class ModelLogin extends Model{
     public static function get_data(){
         if(!R::testConnection())
             R::setup( 'mysql:host=localhost;dbname=beetest;charset=utf8mb4',
-            'tegowai', 'easyPass' ); //for both mysql or mariaDB
+            'tegowai', 'easyPass' );
 
         $errors = array();
 
