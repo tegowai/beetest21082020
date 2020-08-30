@@ -18,7 +18,9 @@ class ModelTasks extends Model{
         $res = mysqli_fetch_all($result, MYSQLI_ASSOC);
         mysqli_close($link);
         $res = intval($res[0]['tasksCnt']);
-        $pages = intdiv($res,self::$qnt) + $res%self::$qnt;
+        $pages = intdiv($res,self::$qnt);
+        if($res%self::$qnt>0)
+            $pages++;
         return $pages;
     }
 

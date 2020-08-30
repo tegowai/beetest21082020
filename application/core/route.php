@@ -55,8 +55,6 @@ class Route{
             Route::redir('Tasks',$page);
             return;
         }
-        // var_dump($_SESSION['post']);
-        // var_dump($_SESSION['update']);
 
         //Set controller and action
         /*if URI is variable length (project will not be in root dir)
@@ -88,10 +86,6 @@ class Route{
 
 
 
-
-
-
-        // $page = intval($routes[4]);
         /*if action parameter is number,convert it to 'index' and
         send number as an argument*/
         if($controller_name=='Tasks'){
@@ -115,7 +109,6 @@ class Route{
             }
         }
 
-
         //if redirected for sorting type or order change
         if(substr_count($action_name,'sort')){
             $_SESSION['sortBy'] = strtolower(str_replace('sort','',$action_name));
@@ -136,6 +129,8 @@ class Route{
         $controller_name = $controllerNS . $controller_name;
         $controller = new $controller_name();
         $action = $action_name;
+
+
 
         if(method_exists($controller, $action)){
             // controller method call - page
