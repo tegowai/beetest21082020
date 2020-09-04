@@ -34,7 +34,17 @@
                         $paginationStart = $page-2;
                     if($page==$pages-2)
                         $paginationStart = $page;
-                    for($i=$paginationStart;$i<=$paginationStart+2;$i++){
+                    $lists = 2;
+                    if($pages==1){
+                        $paginationStart = 1;
+                        $lists=0;
+                    }
+                    if($pages==2){
+                        $lists = 1;
+                        $paginationStart=1;
+                    }
+
+                    for($i=$paginationStart;$i<=$paginationStart+$lists;$i++){
                         $activity = $i==$page ? 'active' : '';
                         echo '
                         <li class="page-item '.$activity.'">
